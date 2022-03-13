@@ -5,6 +5,7 @@ import lombok.*;
 
 import java.util.UUID;
 
+@Setter
 @Getter
 @RequiredArgsConstructor
 public class Rebel {

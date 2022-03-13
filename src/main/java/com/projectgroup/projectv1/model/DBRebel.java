@@ -38,7 +38,7 @@ public class DBRebel {
 
         return rebel;
     }
-
+//
 //    public Rebel updateRebelInventory(UUID id, RebelRequestInventory rebelRequestInventory) throws Exception {
 //        rebels.stream().filter(rebel -> Objects.equals(rebel.getId(),id)).forEach(rebel->{
 //            rebel.getInventory().setWater(rebelRequestInventory.getWater());
@@ -49,12 +49,12 @@ public class DBRebel {
 //        return rebelDetails(id);
 //    }
 
-//    private Rebel rebelDetails(UUID id) throws Exception {
-//        Optional<Rebel> resultRebel = rebels.stream().filter(rebel -> Objects.equals(rebel.getId(),id)).findAny();
-//        if (resultRebel.isPresent()){
-//            return resultRebel.get();
-//        }else {
-//            throw new Exception("Rebelde não encontrado!");
-//        }
-//    }
+    private Rebel rebelDetails(UUID id) throws Exception {
+        Optional<Rebel> resultRebel = rebels.stream().filter(rebel -> Objects.equals(rebel.getId(),id)).findAny();
+        if (resultRebel.isPresent()){
+            return resultRebel.get();
+        }else {
+            throw new Exception("Rebelde não encontrado!");
+        }
+    }
 }

@@ -26,7 +26,14 @@ public class NegotiationService {
 
         if (negotiatorA == null || negotiatorB == null) {
             return "Rebelde não encontrado. Verifique se preencheu corretamente o ID.";
+        } else if (negotiatorA.isTraitor() || negotiatorB.isTraitor()) {
+            if (negotiatorA.isTraitor()) {
+                return "Rebelde " + negotiatorA.getName() + " é um traidor";
+            } else {
+                return "Rebelde " + negotiatorB.getName() + " é um traidor";
+            }
         } else if (checkStockTrading(negotiation, negotiatorA, negotiatorB) && checkPointsTrading(negotiation)) {
+            System.out.println("Ralizando negociação \n");
             return makeExchange(negotiation, negotiatorA, negotiatorB);
         }
         return "Não foi possivel fazer a troca.";
@@ -36,37 +43,52 @@ public class NegotiationService {
         if (negotiation.getInventarioRebeldeA().getWater() > 0) {
             negociadorB.getInventory().setWater(negociadorB.getInventory().getWater() + negotiation.getInventarioRebeldeA().getWater());
             negociadorA.getInventory().setWater(negociadorA.getInventory().getWater() - negotiation.getInventarioRebeldeA().getWater());
+            System.out.println("Água negociadorA: " + negociadorA.getInventory().getWater());
+            System.out.println("Água negociadorB: " + negociadorB.getInventory().getWater() + "\n\n");
         }
         if (negotiation.getInventarioRebeldeA().getFood() > 0) {
             negociadorB.getInventory().setFood(negociadorB.getInventory().getFood() + negotiation.getInventarioRebeldeA().getFood());
             negociadorA.getInventory().setFood(negociadorA.getInventory().getFood() - negotiation.getInventarioRebeldeA().getFood());
+            System.out.println("Comida negociadorA: " + negociadorA.getInventory().getFood());
+            System.out.println("Comida negociadorB: " + negociadorB.getInventory().getFood() + "\n\n");
         }
         if (negotiation.getInventarioRebeldeA().getGun() > 0) {
             negociadorB.getInventory().setGun(negociadorB.getInventory().getGun() + negotiation.getInventarioRebeldeA().getGun());
             negociadorA.getInventory().setGun(negociadorA.getInventory().getGun() - negotiation.getInventarioRebeldeA().getGun());
+            System.out.println("Arma negociadorA: " + negociadorA.getInventory().getGun());
+            System.out.println("Arma negociadorB: " + negociadorB.getInventory().getGun() + "\n\n");
         }
         if (negotiation.getInventarioRebeldeA().getAmmo() > 0) {
             negociadorB.getInventory().setAmmo(negociadorB.getInventory().getAmmo() + negotiation.getInventarioRebeldeA().getAmmo());
             negociadorA.getInventory().setAmmo(negociadorA.getInventory().getAmmo() - negotiation.getInventarioRebeldeA().getAmmo());
+            System.out.println("Munição negociadorA: " + negociadorA.getInventory().getAmmo());
+            System.out.println("Munição negociadorB: " + negociadorB.getInventory().getAmmo() + "\n\n");
         }
         if (negotiation.getInventarioRebeldeB().getWater() > 0) {
             negociadorA.getInventory().setWater(negociadorA.getInventory().getWater() + negotiation.getInventarioRebeldeB().getWater());
             negociadorB.getInventory().setWater(negociadorB.getInventory().getWater() - negotiation.getInventarioRebeldeB().getWater());
+            System.out.println("Água negociadorA: " + negociadorA.getInventory().getWater());
+            System.out.println("Água negociadorB: " + negociadorB.getInventory().getWater() + "\n\n");
         }
         if (negotiation.getInventarioRebeldeB().getFood() > 0) {
             negociadorA.getInventory().setFood(negociadorA.getInventory().getFood() + negotiation.getInventarioRebeldeB().getFood());
             negociadorB.getInventory().setFood(negociadorB.getInventory().getFood() - negotiation.getInventarioRebeldeB().getFood());
+            System.out.println("Comida negociadorA: " + negociadorA.getInventory().getFood());
+            System.out.println("Comida negociadorB: " + negociadorB.getInventory().getFood() + "\n\n");
         }
         if (negotiation.getInventarioRebeldeB().getGun() > 0) {
             negociadorA.getInventory().setGun(negociadorA.getInventory().getGun() + negotiation.getInventarioRebeldeB().getGun());
             negociadorB.getInventory().setGun(negociadorB.getInventory().getGun() - negotiation.getInventarioRebeldeB().getGun());
+            System.out.println("Arma negociadorA: " + negociadorA.getInventory().getGun());
+            System.out.println("Arma negociadorB: " + negociadorB.getInventory().getGun() + "\n\n");
         }
         if (negotiation.getInventarioRebeldeB().getAmmo() > 0) {
             negociadorA.getInventory().setAmmo(negociadorA.getInventory().getAmmo() + negotiation.getInventarioRebeldeB().getAmmo());
             negociadorB.getInventory().setAmmo(negociadorB.getInventory().getAmmo() - negotiation.getInventarioRebeldeB().getAmmo());
+            System.out.println("Munição negociadorA: " + negociadorA.getInventory().getAmmo());
+            System.out.println("Munição negociadorB: " + negociadorB.getInventory().getAmmo() + "\n\n");
         }
-
-        return "Negociação efetuada com sucesso. \n\n" + negociadorA + "\n\n" + negociadorB;
+        return "Negociação efetuada com sucesso. \n\n" + negociadorA.getName() + "\n\n" + negociadorB.getName();
     }
 
     private boolean checkPointsTrading(Negotiation negotiation) {
@@ -75,14 +97,16 @@ public class NegotiationService {
         Integer rebelFoodPointsA = negotiation.getInventarioRebeldeA().getGun() * 4;
         Integer rebelAmmoPointsA = negotiation.getInventarioRebeldeA().getFood();
         int rebelTotalPointsA = rebelAmmoPointsA + rebelFoodPointsA + rebelWeaponPointsA + rebelWaterPointsA;
+        System.out.println("Total de pontos RebeldeA: " + rebelTotalPointsA);
 
         Integer rebelWaterPointsB = negotiation.getInventarioRebeldeB().getWater() * 2;
         Integer rebelWeaponPointsB = negotiation.getInventarioRebeldeB().getAmmo() * 3;
         Integer rebelFoodPointsB = negotiation.getInventarioRebeldeB().getGun() * 4;
         Integer rebelAmmoPointsB = negotiation.getInventarioRebeldeB().getFood();
         int rebelTotoalPointsB = rebelAmmoPointsB + rebelFoodPointsB + rebelWeaponPointsB + rebelWaterPointsB;
+        System.out.println("Total de pontos RebeldeB: " + rebelTotoalPointsB);
 
-        return rebelTotalPointsA ==rebelTotoalPointsB;
+        return rebelTotalPointsA == rebelTotoalPointsB;
     }
 
     private boolean checkStockTrading(Negotiation negotiation, Rebel negociadorA, Rebel negociadorB) {

@@ -2,7 +2,6 @@ package com.projectgroup.projectv1.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
 @NoArgsConstructor

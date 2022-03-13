@@ -1,7 +1,6 @@
 package com.projectgroup.projectv1.service;
 
 import com.projectgroup.projectv1.dto.RebelRequest;
-import com.projectgroup.projectv1.dto.RebelRequestInventory;
 import com.projectgroup.projectv1.model.DBRebel;
 import com.projectgroup.projectv1.model.Location;
 import com.projectgroup.projectv1.model.Rebel;
@@ -12,6 +11,7 @@ import java.util.UUID;
 
 @Service
 public class RebelService {
+
     private DBRebel db = new DBRebel();
 
     public List<Rebel> getAllRebels() {
@@ -43,7 +43,5 @@ public class RebelService {
         return db.reportRebel(id);
     }
 
-    public Rebel upadateRebelInventory(UUID id, RebelRequestInventory rebelRequestInventory) throws Exception {
-        return db.updateRebelInventory(id,rebelRequestInventory);
-    }
+
 }

@@ -1,22 +1,23 @@
 package com.projectgroup.projectv1.service;
 
-import com.projectgroup.projectv1.model.DBRebel;
 import com.projectgroup.projectv1.model.Rebel;
 import com.projectgroup.projectv1.model.negotiation.Negotiation;
 import lombok.AllArgsConstructor;
-import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
+
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
 public class NegotiationService {
     private final RebelService rebelService;
-    private final DBRebel dbRebel;
 
-    @SneakyThrows
     public String negotiate(Negotiation negotiation) {
         Rebel negociadorA = rebelService.getRebel(negotiation.getIdRebeldeA());
         Rebel negociadorB = rebelService.getRebel(negotiation.getIdRebeldeB());
+
+        negociadorA =rebelService.getRebel(UUID.fromString("27dacf13-4d15-46cf-8f10-bcdf9d127413"));
+        negociadorB = rebelService.getRebel(UUID.fromString("dafd1c4d-528f-4be1-9aff-61cc0ce9d1a6"))
 
         if (negociadorA == null || negociadorB == null) {
             return "Rebelde não encontrado. Verifique se preencheu corretamente o ID.";

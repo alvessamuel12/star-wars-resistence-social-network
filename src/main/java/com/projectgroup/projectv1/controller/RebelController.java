@@ -24,7 +24,7 @@ public class RebelController {
     @GetMapping
     public ResponseEntity<List<RebelResponse>> showRebels() {
         return ResponseEntity.ok(RebelResponse.toResponse(rebelService.getAllRebels()));
-    };
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<RebelResponse> showRebel(@PathVariable UUID id) {

@@ -5,7 +5,7 @@ import lombok.*;
 
 import java.util.UUID;
 
-@Setter
+
 @Getter
 @RequiredArgsConstructor
 public class Rebel {
@@ -19,7 +19,8 @@ public class Rebel {
     private String gender;
     @Setter
     private Location location = new Location();
-    private final Inventory inventory = new Inventory();
+    @Setter
+    private Inventory inventory = new Inventory();
     private Integer reportCounts = 0;
     @Setter
     private boolean isTraitor = false;

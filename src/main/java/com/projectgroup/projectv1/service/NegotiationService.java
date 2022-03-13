@@ -1,28 +1,33 @@
 package com.projectgroup.projectv1.service;
 
+import com.projectgroup.projectv1.dto.RebelRequestInventory;
 import com.projectgroup.projectv1.model.Rebel;
 import com.projectgroup.projectv1.model.negotiation.Negotiation;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.UUID;
-
 @Service
 @AllArgsConstructor
 public class NegotiationService {
+
     private final RebelService rebelService;
 
-    public String negotiate(Negotiation negotiation) {
-        Rebel negociadorA = rebelService.getRebel(negotiation.getIdRebeldeA());
-        Rebel negociadorB = rebelService.getRebel(negotiation.getIdRebeldeB());
+    public String negotiate(RebelRequestInventory rebelRequestInventory) {
+        Negotiation negotiation = Negotiation.builder()
+                .idRebeldeA(rebelRequestInventory.getIdA())
+                .inventarioRebeldeA(rebelRequestInventory.getInventoryA())
+                .idRebeldeB(rebelRequestInventory.getIdB())
+                .inventarioRebeldeB(rebelRequestInventory.getInventoryB())
+                .build();
 
-        negociadorA =rebelService.getRebel(UUID.fromString("27dacf13-4d15-46cf-8f10-bcdf9d127413"));
-        negociadorB = rebelService.getRebel(UUID.fromString("dafd1c4d-528f-4be1-9aff-61cc0ce9d1a6"))
+        Rebel negotiatorA = rebelService.getRebel(negotiation.getIdRebeldeA());
+        Rebel negotiatorB = rebelService.getRebel(negotiation.getIdRebeldeB());
 
-        if (negociadorA == null || negociadorB == null) {
+
+        if (negotiatorA == null || negotiatorB == null) {
             return "Rebelde não encontrado. Verifique se preencheu corretamente o ID.";
-        } else if (checkStockTrading(negotiation, negociadorA, negociadorB) && checkPointsTrading(negotiation)) {
-            return makeExchange(negotiation, negociadorA, negociadorB);
+        } else if (checkStockTrading(negotiation, negotiatorA, negotiatorB) && checkPointsTrading(negotiation)) {
+            return makeExchange(negotiation, negotiatorA, negotiatorB);
         }
         return "Não foi possivel fazer a troca.";
     }

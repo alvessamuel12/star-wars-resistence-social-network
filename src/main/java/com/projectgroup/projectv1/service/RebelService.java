@@ -12,7 +12,7 @@ import java.util.UUID;
 @Service
 public class RebelService {
 
-    private DBRebel db = new DBRebel();
+    private final DBRebel db = new DBRebel();
 
     public List<Rebel> getAllRebels() {
         return db.showAll();

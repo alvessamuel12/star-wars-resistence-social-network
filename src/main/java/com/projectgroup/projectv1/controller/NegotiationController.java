@@ -1,5 +1,6 @@
 package com.projectgroup.projectv1.controller;
 
+import com.projectgroup.projectv1.dto.RebelRequestInventory;
 import com.projectgroup.projectv1.model.negotiation.Negotiation;
 import com.projectgroup.projectv1.service.NegotiationService;
 import lombok.AllArgsConstructor;
@@ -18,7 +19,7 @@ public class NegotiationController {
     NegotiationService negotiationService;
 
     @PostMapping
-    private String negotiate(@RequestBody Negotiation negotiation) {
-        return negotiationService.negotiate(negotiation);
+    private String negotiate(@RequestBody RebelRequestInventory rebelRequestInventory) {
+        return negotiationService.negotiate(rebelRequestInventory);
     }
 }

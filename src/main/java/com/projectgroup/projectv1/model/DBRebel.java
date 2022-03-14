@@ -1,8 +1,8 @@
 package com.projectgroup.projectv1.model;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import com.projectgroup.projectv1.dto.RebelRequestInventory;
+
+import java.util.*;
 
 public class DBRebel {
     private final List<Rebel> rebels = new ArrayList<>();
@@ -37,5 +37,24 @@ public class DBRebel {
         }
 
         return rebel;
+    }
+//
+//    public Rebel updateRebelInventory(UUID id, RebelRequestInventory rebelRequestInventory) throws Exception {
+//        rebels.stream().filter(rebel -> Objects.equals(rebel.getId(),id)).forEach(rebel->{
+//            rebel.getInventory().setWater(rebelRequestInventory.getWater());
+//            rebel.getInventory().setGun(rebelRequestInventory.getGun());
+//            rebel.getInventory().setAmmo(rebelRequestInventory.getAmmo());
+//            rebel.getInventory().setFood(rebelRequestInventory.getFood());
+//        });
+//        return rebelDetails(id);
+//    }
+
+    private Rebel rebelDetails(UUID id) throws Exception {
+        Optional<Rebel> resultRebel = rebels.stream().filter(rebel -> Objects.equals(rebel.getId(),id)).findAny();
+        if (resultRebel.isPresent()){
+            return resultRebel.get();
+        }else {
+            throw new Exception("Rebelde não encontrado!");
+        }
     }
 }

@@ -11,7 +11,8 @@ import java.util.UUID;
 
 @Service
 public class RebelService {
-    private DBRebel db = new DBRebel();
+
+    private final DBRebel db = new DBRebel();
 
     public List<Rebel> getAllRebels() {
         return db.showAll();
@@ -33,6 +34,7 @@ public class RebelService {
         return rebel;
     }
 
+
     public Rebel updateLocation(UUID id, Location location) {
         return db.updateLocation(id, location);
     }
@@ -40,4 +42,6 @@ public class RebelService {
     public Rebel reportRebel (UUID id) {
         return db.reportRebel(id);
     }
+
+
 }

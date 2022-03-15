@@ -12,7 +12,7 @@ public class NegotiationService {
 
     private final RebelService rebelService;
 
-    public String negotiate(RebelRequestInventory rebelRequestInventory) {
+    public String negotiate(RebelRequestInventory rebelRequestInventory) throws Exception {
         Negotiation negotiation = Negotiation.builder()
                 .idRebeldeA(rebelRequestInventory.getIdA())
                 .inventarioRebeldeA(rebelRequestInventory.getInventoryA())

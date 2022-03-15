@@ -7,8 +7,10 @@ import java.util.UUID;
 
 @Getter
 public class RebelRequestInventory {
+    @com.projectgroup.projectv1.utils.validators.UUID
     private UUID idA;
     private Inventory inventoryA;
+    @com.projectgroup.projectv1.utils.validators.UUID
     private UUID idB;
     private Inventory inventoryB;
 }

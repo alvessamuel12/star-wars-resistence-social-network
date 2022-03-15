@@ -1,6 +1,5 @@
 package com.projectgroup.projectv1.model;
 
-import com.projectgroup.projectv1.dto.RebelRequestInventory;
 
 import java.util.*;
 
@@ -11,24 +10,26 @@ public class DBRebel {
         this.rebels.add(rebel);
     }
 
-    public Rebel findRebel (UUID id) {
-        return this.rebels.stream()
-                .filter(rebel -> id.equals(rebel.getId()))
-                .findAny()
-                .orElse(null);
+    public Rebel findRebel (UUID id) throws Exception {
+        Optional<Rebel> resultRebel = rebels.stream().filter(rebel -> Objects.equals(rebel.getId(),id)).findAny();
+        if (resultRebel.isPresent()){
+            return resultRebel.get();
+        }else {
+            throw new Exception("Rebel not found!");
+        }
     }
 
     public List<Rebel> showAll(){
         return this.rebels;
     }
 
-    public Rebel updateLocation (UUID id, Location location){
+    public Rebel updateLocation (UUID id, Location location) throws Exception {
         Rebel rebel = findRebel(id);
         rebel.setLocation(location);
         return rebel;
     }
 
-    public Rebel reportRebel (UUID id) {
+    public Rebel reportRebel (UUID id) throws Exception {
         Rebel rebel = findRebel(id);
 
         rebel.addReport();
@@ -48,13 +49,4 @@ public class DBRebel {
 //        });
 //        return rebelDetails(id);
 //    }
-
-    private Rebel rebelDetails(UUID id) throws Exception {
-        Optional<Rebel> resultRebel = rebels.stream().filter(rebel -> Objects.equals(rebel.getId(),id)).findAny();
-        if (resultRebel.isPresent()){
-            return resultRebel.get();
-        }else {
-            throw new Exception("Rebelde não encontrado!");
-        }
-    }
 }

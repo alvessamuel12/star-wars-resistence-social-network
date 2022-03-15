@@ -39,14 +39,5 @@ public class DBRebel {
 
         return rebel;
     }
-//
-//    public Rebel updateRebelInventory(UUID id, RebelRequestInventory rebelRequestInventory) throws Exception {
-//        rebels.stream().filter(rebel -> Objects.equals(rebel.getId(),id)).forEach(rebel->{
-//            rebel.getInventory().setWater(rebelRequestInventory.getWater());
-//            rebel.getInventory().setGun(rebelRequestInventory.getGun());
-//            rebel.getInventory().setAmmo(rebelRequestInventory.getAmmo());
-//            rebel.getInventory().setFood(rebelRequestInventory.getFood());
-//        });
-//        return rebelDetails(id);
-//    }
+
 }

@@ -1,5 +1,6 @@
 package com.projectgroup.projectv1.service;
 
+import com.projectgroup.projectv1.Projectv1Application;
 import com.projectgroup.projectv1.dto.RebelRequest;
 import com.projectgroup.projectv1.model.DBRebel;
 import com.projectgroup.projectv1.model.Location;
@@ -12,7 +13,8 @@ import java.util.UUID;
 @Service
 public class RebelService {
 
-    private final DBRebel db = new DBRebel();
+//    private final DBRebel db = new DBRebel();
+    DBRebel db = Projectv1Application.dbRebel;
 
     public List<Rebel> getAllRebels() {
         return db.showAll();

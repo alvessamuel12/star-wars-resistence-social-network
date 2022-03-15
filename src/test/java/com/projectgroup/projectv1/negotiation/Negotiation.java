@@ -6,7 +6,6 @@ import com.projectgroup.projectv1.model.inventory.Inventory;
 import com.projectgroup.projectv1.service.NegotiationService;
 import com.projectgroup.projectv1.service.RebelService;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -26,11 +25,7 @@ public class Negotiation {
     private RebelService rebelService;
 
     private Rebel rebeldeA() {
-        Rebel rebeldeA= new Rebel();
-        rebeldeA.setId(UUID.randomUUID());
-        rebeldeA.setName("Arthur");
-        rebeldeA.setAge(19);
-        rebeldeA.setGender("MASCULINO");
+        Rebel rebeldeA= new Rebel(UUID.randomUUID(),"Arthur",19,"male");
         Location localizacao = new Location();
         rebeldeA.setLocation(localizacao);
         Inventory inventario = new Inventory();
@@ -42,11 +37,7 @@ public class Negotiation {
         return rebeldeA;
     }
     private Rebel rebeldeB() {
-        Rebel rebeldeB= new Rebel();
-        rebeldeB.setId(UUID.randomUUID());
-        rebeldeB.setName("Anna");
-        rebeldeB.setAge(26);
-        rebeldeB.setGender("FEMININO");
+        Rebel rebeldeB= new Rebel(UUID.randomUUID(),"Anna",26,"female");
         Location localizacao = new Location();
         rebeldeB.setLocation(localizacao);
         Inventory inventario = new Inventory();
@@ -60,5 +51,6 @@ public class Negotiation {
 
     @Test
     public void negotiate(){
+
     }
 }

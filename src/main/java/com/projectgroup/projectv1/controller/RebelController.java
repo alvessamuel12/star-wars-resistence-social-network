@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 import java.util.UUID;
@@ -27,14 +28,17 @@ public class RebelController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<RebelResponse> showRebel(@PathVariable UUID id) {
+    public ResponseEntity<RebelResponse> showRebel(@PathVariable UUID id) throws Exception{
         Rebel rebel = rebelService.getRebel(id);
 
         return ResponseEntity.ok(new RebelResponse(rebel));
     }
 
     @PostMapping
-    public ResponseEntity<RebelResponse> addRebel(@RequestBody RebelRequest rebelRequest, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<RebelResponse> addRebel(
+            @RequestBody @Valid RebelRequest rebelRequest,
+            UriComponentsBuilder uriBuilder
+    ) throws Exception {
         Rebel rebel = rebelService.addRebel(rebelRequest);
 
         URI uri = uriBuilder.path("/rebel/{id}").buildAndExpand(rebel.getId()).toUri();
@@ -42,14 +46,14 @@ public class RebelController {
     }
 
     @PatchMapping("/{id}/location")
-    public ResponseEntity<RebelResponse> updateLocation(@PathVariable UUID id, @RequestBody Location location) {
+    public ResponseEntity<RebelResponse> updateLocation(@PathVariable UUID id, @RequestBody @Valid Location location) throws Exception {
         Rebel rebel = rebelService.updateLocation(id, location);
 
         return ResponseEntity.ok(new RebelResponse(rebel));
     }
 
     @PatchMapping("/{id}/report")
-    public ResponseEntity<RebelResponse> reportRebel(@PathVariable UUID id) {
+    public ResponseEntity<RebelResponse> reportRebel(@PathVariable UUID id) throws Exception {
         Rebel rebel = rebelService.reportRebel(id);
 
         return ResponseEntity.ok(new RebelResponse(rebel));

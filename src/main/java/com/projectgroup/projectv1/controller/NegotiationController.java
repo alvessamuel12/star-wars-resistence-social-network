@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 @AllArgsConstructor
 @RequestMapping("/negotiation")
@@ -18,7 +20,7 @@ public class NegotiationController {
     NegotiationService negotiationService;
 
     @PostMapping
-    private String negotiate(@RequestBody RebelRequestInventory rebelRequestInventory) {
+    private String negotiate(@RequestBody @Valid RebelRequestInventory rebelRequestInventory) throws Exception {
         return negotiationService.negotiate(rebelRequestInventory);
     }
 }

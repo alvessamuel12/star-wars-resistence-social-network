@@ -18,7 +18,7 @@ public class RebelService {
         return db.showAll();
     }
 
-    public Rebel getRebel(UUID id) {
+    public Rebel getRebel(UUID id) throws Exception {
         return db.findRebel(id);
     }
 
@@ -35,11 +35,11 @@ public class RebelService {
     }
 
 
-    public Rebel updateLocation(UUID id, Location location) {
+    public Rebel updateLocation(UUID id, Location location) throws Exception {
         return db.updateLocation(id, location);
     }
 
-    public Rebel reportRebel (UUID id) {
+    public Rebel reportRebel (UUID id) throws Exception {
         return db.reportRebel(id);
     }
 

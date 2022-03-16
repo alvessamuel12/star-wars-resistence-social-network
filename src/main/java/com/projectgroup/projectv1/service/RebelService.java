@@ -1,12 +1,14 @@
 package com.projectgroup.projectv1.service;
 
 import com.projectgroup.projectv1.dto.RebelRequest;
+import com.projectgroup.projectv1.exceptions.NotFoundException;
 import com.projectgroup.projectv1.model.DBRebel;
 import com.projectgroup.projectv1.model.Location;
 import com.projectgroup.projectv1.model.Rebel;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -18,8 +20,14 @@ public class RebelService {
         return db.showAll();
     }
 
-    public Rebel getRebel(UUID id) throws Exception {
-        return db.findRebel(id);
+
+    public Rebel getRebel(UUID id) throws NotFoundException {
+        Optional<Rebel> rebel = db.findRebel(id);
+        if (rebel.isPresent()) {
+            return rebel.get();
+        } else {
+            throw new NotFoundException("User not found.");
+        }
     }
 
     public Rebel addRebel(RebelRequest rebelRequest) {
@@ -36,11 +44,21 @@ public class RebelService {
 
 
     public Rebel updateLocation(UUID id, Location location) throws Exception {
-        return db.updateLocation(id, location);
+        Optional<Rebel> rebel = db.updateLocation(id, location);
+        if (rebel.isPresent()) {
+            return rebel.get();
+        } else {
+            throw new NotFoundException("User not found.");
+        }
     }
 
     public Rebel reportRebel (UUID id) throws Exception {
-        return db.reportRebel(id);
+        Optional<Rebel> rebel = db.reportRebel(id);
+        if (rebel.isPresent()) {
+            return rebel.get();
+        } else {
+            throw new NotFoundException("User not found.");
+        }
     }
 
 

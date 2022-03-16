@@ -32,7 +32,8 @@ public class RebelService {
                 UUID.randomUUID(),
                 rebelRequest.getName(),
                 rebelRequest.getAge(),
-                rebelRequest.getGender()
+                rebelRequest.getGender(),
+                rebelRequest.getInventory()
         );
         log.info("Adicionando o rebelde:"+rebel);
         db.add(rebel);

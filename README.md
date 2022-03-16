@@ -1,4 +1,4 @@
-# Star Wars Resistence Social Nnetwork - REST API
+# Star Wars Resistence Social Network - REST API
 
 Projeto final do modulo Desenvolvimento Web do curso Full-Stack organizado pelo Grupo Santander em parceria com a Let's Code
 

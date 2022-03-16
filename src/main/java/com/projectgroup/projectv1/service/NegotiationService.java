@@ -4,13 +4,15 @@ import com.projectgroup.projectv1.dto.RebelRequestInventory;
 import com.projectgroup.projectv1.model.Rebel;
 import com.projectgroup.projectv1.model.negotiation.Negotiation;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
 public class NegotiationService {
 
-    private final RebelService rebelService;
+    @Autowired
+    private RebelService rebelService;
 
     public String negotiate(RebelRequestInventory rebelRequestInventory) throws Exception {
         Negotiation negotiation = Negotiation.builder()

@@ -5,6 +5,7 @@ import com.projectgroup.projectv1.dto.RebelResponse;
 import com.projectgroup.projectv1.model.Location;
 import com.projectgroup.projectv1.model.Rebel;
 import com.projectgroup.projectv1.service.RebelService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/rebel")
 public class RebelController {
 

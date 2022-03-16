@@ -1,6 +1,7 @@
 package com.projectgroup.projectv1.service;
 
 import com.projectgroup.projectv1.model.Rebel;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.projectgroup.projectv1.model.report.Report;
@@ -9,12 +10,14 @@ import java.text.DecimalFormat;
 import java.util.List;
 
 @Service
+@Slf4j
 public class ReportService {
 
     @Autowired
     private RebelService rebelService;
 
     public Report getReport(){
+    log.info("Gerendo relatorio");
         Report report = new Report();
         List<Rebel> rebels = rebelService.getAllRebels();
 

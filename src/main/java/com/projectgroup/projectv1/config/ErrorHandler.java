@@ -45,7 +45,7 @@ public class ErrorHandler {
 
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     @ExceptionHandler({HttpMessageNotReadableException.class})
-    public String handleNotFound(HttpMessageNotReadableException exception){
+    public String handleNotReadable(HttpMessageNotReadableException exception){
         return exception.getMessage();
     }
 }

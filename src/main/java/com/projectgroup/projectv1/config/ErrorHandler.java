@@ -1,10 +1,12 @@
 package com.projectgroup.projectv1.config;
 
+import com.projectgroup.projectv1.exceptions.NotFoundException;
 import com.projectgroup.projectv1.exceptions.ValidationError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -33,5 +35,17 @@ public class ErrorHandler {
         });
 
         return errors;
+    }
+
+    @ResponseStatus(code = HttpStatus.NOT_FOUND)
+    @ExceptionHandler({NotFoundException.class})
+    public String handleNotFound(NotFoundException exception){
+        return exception.getMessage();
+    }
+
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+    @ExceptionHandler({HttpMessageNotReadableException.class})
+    public String handleNotFound(HttpMessageNotReadableException exception){
+        return exception.getMessage();
     }
 }

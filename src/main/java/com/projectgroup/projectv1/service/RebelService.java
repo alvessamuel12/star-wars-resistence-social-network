@@ -1,6 +1,7 @@
 package com.projectgroup.projectv1.service;
 
 import com.projectgroup.projectv1.dto.RebelRequest;
+import com.projectgroup.projectv1.exceptions.NotFoundException;
 import com.projectgroup.projectv1.model.DBRebel;
 import com.projectgroup.projectv1.model.Location;
 import com.projectgroup.projectv1.model.Rebel;
@@ -8,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -23,7 +25,13 @@ public class RebelService {
 
     public Rebel getRebel(UUID id) throws Exception {
         log.info("Buscando o rebelde id: "+ id );
-        return db.findRebel(id);
+        Optional<Rebel> rebel = db.findRebel(id);
+
+        if (rebel.isPresent()) {
+            return rebel.get();
+        } else {
+            throw new NotFoundException("User not found.");
+        }
     }
 
     public Rebel addRebel(RebelRequest rebelRequest) {
@@ -43,12 +51,24 @@ public class RebelService {
 
     public Rebel updateLocation(UUID id, Location location) throws Exception {
         log.info("Atualizando alocalizaçao do rebelde id: "+ id);
-        return db.updateLocation(id, location);
+        Optional<Rebel> rebel = db.updateLocation(id, location);
+
+        if (rebel.isPresent()) {
+            return rebel.get();
+        } else {
+            throw new NotFoundException("User not found.");
+        }
     }
 
     public Rebel reportRebel (UUID id) throws Exception {
         log.info("Reportando rebelde id: "+ id);
-        return db.reportRebel(id);
+        Optional<Rebel> rebel = db.reportRebel(id);
+
+        if (rebel.isPresent()) {
+            return rebel.get();
+        } else {
+            throw new NotFoundException("User not found.");
+        }
     }
 
 

@@ -29,6 +29,9 @@ public class ReportService {
         Integer amountWater = 0;
         Integer amountFood = 0;
 
+        Integer pointsTraitor = 0;
+
+
 
         for (Rebel rebel : rebels) {
             totalRebel++;
@@ -54,6 +57,9 @@ public class ReportService {
         report.setAverageAmmo(amountAmmo / (totalRebel - totalTraitor));
         report.setAverageWater(amountWater / (totalRebel - totalTraitor));
         report.setAverageFood(amountFood / (totalRebel - totalTraitor));
+
+        pointsTraitor = amountAmmo*3+amountGun*4+amountWater*2+amountFood;
+        report.setPointsTraitors(pointsTraitor);
 
         return report;
     }

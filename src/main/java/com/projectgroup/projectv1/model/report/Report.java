@@ -12,8 +12,13 @@ public class Report {
 
     private double percentRebels;
     private double percentTraitors;
+
     private double averageGun;
     private double averageAmmo;
     private double averageWater;
     private double averageFood;
+
+    private double pointsTraitors;
+
+
 }

@@ -45,38 +45,38 @@ public class NegotiationService {
     }
 
     private String makeExchange(Negotiation negotiation, Rebel negociadorA, Rebel negociadorB) {
-        if (negotiation.getInventarioRebeldeA().getWater() > 0) {
+        if (negotiation.getInventarioRebeldeA().getWater().intValue() > 0) {
             negociadorB.getInventory().setWater(negociadorB.getInventory().getWater() + negotiation.getInventarioRebeldeA().getWater());
             negociadorA.getInventory().setWater(negociadorA.getInventory().getWater() - negotiation.getInventarioRebeldeA().getWater());
         }
         if (negotiation.getInventarioRebeldeA().getFood() > 0) {
             negociadorB.getInventory().setFood(negociadorB.getInventory().getFood() + negotiation.getInventarioRebeldeA().getFood());
             negociadorA.getInventory().setFood(negociadorA.getInventory().getFood() - negotiation.getInventarioRebeldeA().getFood());
-      }
+        }
         if (negotiation.getInventarioRebeldeA().getGun() > 0) {
             negociadorB.getInventory().setGun(negociadorB.getInventory().getGun() + negotiation.getInventarioRebeldeA().getGun());
             negociadorA.getInventory().setGun(negociadorA.getInventory().getGun() - negotiation.getInventarioRebeldeA().getGun());
-     }
+        }
         if (negotiation.getInventarioRebeldeA().getAmmo() > 0) {
             negociadorB.getInventory().setAmmo(negociadorB.getInventory().getAmmo() + negotiation.getInventarioRebeldeA().getAmmo());
             negociadorA.getInventory().setAmmo(negociadorA.getInventory().getAmmo() - negotiation.getInventarioRebeldeA().getAmmo());
-       }
+        }
         if (negotiation.getInventarioRebeldeB().getWater() > 0) {
             negociadorA.getInventory().setWater(negociadorA.getInventory().getWater() + negotiation.getInventarioRebeldeB().getWater());
             negociadorB.getInventory().setWater(negociadorB.getInventory().getWater() - negotiation.getInventarioRebeldeB().getWater());
-     }
+        }
         if (negotiation.getInventarioRebeldeB().getFood() > 0) {
             negociadorA.getInventory().setFood(negociadorA.getInventory().getFood() + negotiation.getInventarioRebeldeB().getFood());
             negociadorB.getInventory().setFood(negociadorB.getInventory().getFood() - negotiation.getInventarioRebeldeB().getFood());
-      }
+        }
         if (negotiation.getInventarioRebeldeB().getGun() > 0) {
             negociadorA.getInventory().setGun(negociadorA.getInventory().getGun() + negotiation.getInventarioRebeldeB().getGun());
             negociadorB.getInventory().setGun(negociadorB.getInventory().getGun() - negotiation.getInventarioRebeldeB().getGun());
-      }
+        }
         if (negotiation.getInventarioRebeldeB().getAmmo() > 0) {
             negociadorA.getInventory().setAmmo(negociadorA.getInventory().getAmmo() + negotiation.getInventarioRebeldeB().getAmmo());
             negociadorB.getInventory().setAmmo(negociadorB.getInventory().getAmmo() - negotiation.getInventarioRebeldeB().getAmmo());
-      }
+        }
         return "Negociação efetuada com sucesso. \n\n" + negociadorA.getName() + "\n\n" + negociadorB.getName();
     }
 

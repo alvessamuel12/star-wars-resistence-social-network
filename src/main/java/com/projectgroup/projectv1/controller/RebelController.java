@@ -57,7 +57,7 @@ public class RebelController {
         return ResponseEntity.ok(new RebelResponse(rebel));
     }
 
-    @PatchMapping("/{id}/report")
+    @PatchMapping("/{id}/report-traitor")
     @CacheEvict(value = "showAllRebels", allEntries = true)
     public ResponseEntity<RebelResponse> reportRebel(@PathVariable UUID id) throws Exception {
         Rebel rebel = rebelService.reportRebel(id);

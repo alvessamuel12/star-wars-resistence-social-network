@@ -1,5 +1,6 @@
 package com.projectgroup.projectv1.config;
 
+import com.projectgroup.projectv1.exceptions.NotFoundException;
 import com.projectgroup.projectv1.exceptions.ValidationError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -33,5 +34,11 @@ public class ErrorHandler {
         });
 
         return errors;
+    }
+
+    @ResponseStatus(code = HttpStatus.NOT_FOUND)
+    @ExceptionHandler({NotFoundException.class})
+    public String handleNotFound(NotFoundException exception){
+        return exception.getMessage();
     }
 }

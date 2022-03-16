@@ -14,14 +14,18 @@ public class ReportService {
     @Autowired
     private RebelService rebelService;
 
-    DecimalFormat formato = new DecimalFormat("#.##");
-
     public Report getReport(){
         Report report = new Report();
+        List<Rebel> rebels = rebelService.getAllRebels();
 
         Double totalTraitor = 0d;
         Double totalRebel = 0d;
-        List<Rebel> rebels = rebelService.getAllRebels();
+
+        Integer amountGun = 0;
+        Integer amountAmmo = 0;
+        Integer amountWater = 0;
+        Integer amountFood = 0;
+
 
         for (Rebel rebel : rebels) {
             totalRebel++;
@@ -30,8 +34,23 @@ public class ReportService {
             }
         }
 
+        for (Rebel rebel : rebels) {
+            if (!rebel.isTraitor()) {
+                amountAmmo += rebel.getInventory().getAmmo();
+                amountGun += rebel.getInventory().getGun();
+                amountWater += rebel.getInventory().getWater();
+                amountFood += rebel.getInventory().getFood();
+            }
+        }
+
+
         report.setPercentTraitors((totalTraitor / totalRebel) * 100 );
         report.setPercentRebels((1 - (totalTraitor / totalRebel)) * 100);
+
+        report.setAverageGun(amountGun / (totalRebel - totalTraitor));
+        report.setAverageAmmo(amountAmmo / (totalRebel - totalTraitor));
+        report.setAverageWater(amountWater / (totalRebel - totalTraitor));
+        report.setAverageFood(amountFood / (totalRebel - totalTraitor));
 
         return report;
     }

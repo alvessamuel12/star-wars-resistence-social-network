@@ -6,6 +6,8 @@ import com.projectgroup.projectv1.model.Location;
 import com.projectgroup.projectv1.model.Rebel;
 import com.projectgroup.projectv1.service.RebelService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -23,6 +25,7 @@ public class RebelController {
     RebelService rebelService;
 
     @GetMapping
+    @Cacheable(value = "showAllRebels")
     public ResponseEntity<List<RebelResponse>> showRebels() {
         return ResponseEntity.ok(RebelResponse.toResponse(rebelService.getAllRebels()));
     }
@@ -35,6 +38,7 @@ public class RebelController {
     }
 
     @PostMapping
+    @CacheEvict(value = "showAllRebels", allEntries = true)
     public ResponseEntity<RebelResponse> addRebel(
             @RequestBody @Valid RebelRequest rebelRequest,
             UriComponentsBuilder uriBuilder
@@ -46,6 +50,7 @@ public class RebelController {
     }
 
     @PatchMapping("/{id}/location")
+    @CacheEvict(value = "showAllRebels", allEntries = true)
     public ResponseEntity<RebelResponse> updateLocation(@PathVariable UUID id, @RequestBody @Valid Location location) throws Exception {
         Rebel rebel = rebelService.updateLocation(id, location);
 
@@ -53,6 +58,7 @@ public class RebelController {
     }
 
     @PatchMapping("/{id}/report")
+    @CacheEvict(value = "showAllRebels", allEntries = true)
     public ResponseEntity<RebelResponse> reportRebel(@PathVariable UUID id) throws Exception {
         Rebel rebel = rebelService.reportRebel(id);
 

@@ -4,10 +4,14 @@ import com.projectgroup.projectv1.dto.RebelRequestInventory;
 import com.projectgroup.projectv1.model.Rebel;
 import com.projectgroup.projectv1.model.negotiation.Negotiation;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.awt.*;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class NegotiationService {
 
     private final RebelService rebelService;
@@ -23,6 +27,7 @@ public class NegotiationService {
         Rebel negotiatorA = rebelService.getRebel(negotiation.getIdRebeldeA());
         Rebel negotiatorB = rebelService.getRebel(negotiation.getIdRebeldeB());
 
+        log.info("Iniciando negociaçao: idA( "+negotiation.getIdRebeldeA()+" ) <-> idB( "+negotiation.getIdRebeldeB()+")");
 
         if (negotiatorA == null || negotiatorB == null) {
             return "Rebelde não encontrado. Verifique se preencheu corretamente o ID.";
@@ -33,6 +38,7 @@ public class NegotiationService {
                 return "Rebelde " + negotiatorB.getName() + " é um traidor";
             }
         } else if (checkStockTrading(negotiation, negotiatorA, negotiatorB) && checkPointsTrading(negotiation)) {
+            log.info("Terminando negociaçao: idA( "+negotiation.getIdRebeldeA()+" ) <-> idB( "+negotiation.getIdRebeldeB()+")");
             return makeExchange(negotiation, negotiatorA, negotiatorB);
         }
         return "Não foi possivel fazer a troca.";

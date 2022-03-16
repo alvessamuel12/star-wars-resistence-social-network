@@ -27,7 +27,8 @@ public class RebelService {
                 UUID.randomUUID(),
                 rebelRequest.getName(),
                 rebelRequest.getAge(),
-                rebelRequest.getGender()
+                rebelRequest.getGender(),
+                rebelRequest.getInventory()
         );
 
         db.add(rebel);

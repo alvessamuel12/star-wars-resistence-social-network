@@ -73,9 +73,9 @@ A API deve oferecer os seguintes relatórios:
 
 
 ## Technologies Used:
-| java |  |
-|--|--|
-| 17 |  |
+| java |
+|--|
+| 17 |
 
 
 ## Clone this repository
